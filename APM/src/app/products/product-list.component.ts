@@ -15,7 +15,6 @@ import {ProductCategoryService} from '../product-categories/product-category.ser
 export class ProductListComponent {
   pageTitle = 'Product List';
   errorMessage = '';
-  selectedCategoryId = 1;
 
   products$ = this.productService.productsWithCategory$
     .pipe(
@@ -33,15 +32,6 @@ export class ProductListComponent {
       })
     );
 
-  productsSimpleFilter$ = this.productService.productsWithCategory$
-    .pipe(
-      map(products =>
-        products.filter(product =>
-          this.selectedCategoryId ? product.categoryId === this.selectedCategoryId : true
-        )
-      )
-    );
-
   constructor(private productService: ProductService,
               private  productCategoryService: ProductCategoryService) { }
 
@@ -50,6 +40,6 @@ export class ProductListComponent {
   }
 
   onSelected(categoryId: string): void {
-    this.selectedCategoryId = +categoryId;
+
   }
 }
